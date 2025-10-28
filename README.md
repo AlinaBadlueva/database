@@ -52,6 +52,14 @@
 [Товары]-N,Required---------------------------N,Optional-[Торговая точка]
 
 
+### ER - диаграмма 
+
+<img width="1223" height="490" alt="diagramm" src="https://github.com/user-attachments/assets/b2182140-58bd-4239-8221-8c32f5ce5d33" />
+
+
 ### Логическая модель
+
+
+
 
 
