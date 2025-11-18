@@ -54,6 +54,7 @@
 
 
 ### Физическая модель
+```sql
 -- Создание последовательностей для автоинкремента (если необходимо)
 CREATE SEQUENCE supplier_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE product_seq START WITH 1 INCREMENT BY 1;
@@ -139,7 +140,7 @@ CREATE TABLE RequestProduct (
     FOREIGN KEY (request_id) REFERENCES Request(request_id) ON DELETE CASCADE,
     FOREIGN KEY (sku) REFERENCES Product(sku) ON DELETE CASCADE
 );
-
+```
 ### Проверка нормальных форм
 
 **1NF — Все атрибуты атомарны ✅**
