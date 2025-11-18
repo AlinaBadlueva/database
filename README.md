@@ -1,5 +1,3 @@
-# Лабораторная работа №1
-
 ## Постановка задачи:
 **Учет товаров на складах и их потребности на торговых точках (1 вариант)**
 
@@ -10,6 +8,7 @@
 торговые точки (наименование, адрес). Товары поступают на склады в
 определенном количестве и в определенную дату. Товары запрашиваются в
 определенную торговую точку в определенном количестве.
+
 ### Сущности:
 Запрос(номер запроса, дата, стоимость заказа)
 Товары(артикул, единица измерения, стоимость единицы, код поставщика)
@@ -38,12 +37,12 @@
 ## ER-Модель
 Имя файла - Diagram 2025-10-07 12-51-29.pdf
 
+# Лабораторная работа №1
+
 ### Базовые сущности
 
 Товары(артикул, единица измерения, стоимость единицы, код поставщика), ключевой набор - артикул   
-
 Склад(номер, адрес, ФИО кладовщика, код поставщика), ключевой набор - номер 
-
 Торговая точка(наименование, адрес, телефон, почта, город), ключевой набор - наименование
 
 ### Отношения
@@ -53,6 +52,93 @@
 [Товары]-1,Required---------------------------N,Optional-[Поставщик]  
 [Товары]-N,Required---------------------------N,Optional-[Торговая точка]
 
+
+### Физическая модель
+-- Создание последовательностей для автоинкремента (если необходимо)
+CREATE SEQUENCE supplier_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE product_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE warehouse_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE request_seq START WITH 1 INCREMENT BY 1;
+
+-- Таблица поставщиков
+CREATE TABLE Supplier (
+    supplier_id INTEGER PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255),
+    address VARCHAR(500),
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Таблица товаров
+CREATE TABLE Product (
+    sku INTEGER PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    unit VARCHAR(50) NOT NULL,
+    unit_price DECIMAL(10,2) NOT NULL CHECK (unit_price >= 0),
+    supplier_id INTEGER NOT NULL,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id) ON DELETE RESTRICT
+);
+
+-- Таблица складов
+CREATE TABLE Warehouse (
+    warehouse_id INTEGER PRIMARY KEY,
+    address VARCHAR(500) NOT NULL,
+    warehouse_manager VARCHAR(255) NOT NULL,
+    supplier_id INTEGER,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id) ON DELETE SET NULL
+);
+
+-- Таблица торговых точек
+CREATE TABLE SelectOutlet (
+    name VARCHAR(255) PRIMARY KEY,
+    address VARCHAR(500) NOT NULL,
+    phone VARCHAR(50),
+    email VARCHAR(255),
+    city VARCHAR(100) NOT NULL,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Таблица запросов
+CREATE TABLE Request (
+    request_id INTEGER PRIMARY KEY,
+    date DATE NOT NULL,
+    order_cost DECIMAL(10,2) NOT NULL CHECK (order_cost >= 0),
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Связующая таблица: Товары на складах
+CREATE TABLE WarehouseProduct (
+    warehouse_id INTEGER,
+    sku INTEGER,
+    quantity INTEGER NOT NULL CHECK (quantity >= 0),
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (warehouse_id, sku),
+    FOREIGN KEY (warehouse_id) REFERENCES Warehouse(warehouse_id) ON DELETE CASCADE,
+    FOREIGN KEY (sku) REFERENCES Product(sku) ON DELETE CASCADE
+);
+
+-- Связующая таблица: Товары в торговых точках
+CREATE TABLE OutletProduct (
+    outlet_name VARCHAR(255),
+    sku INTEGER,
+    quantity INTEGER NOT NULL CHECK (quantity >= 0),
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (outlet_name, sku),
+    FOREIGN KEY (outlet_name) REFERENCES SelectOutlet(name) ON DELETE CASCADE,
+    FOREIGN KEY (sku) REFERENCES Product(sku) ON DELETE CASCADE
+);
+
+-- Связующая таблица: Товары в запросах
+CREATE TABLE RequestProduct (
+    request_id INTEGER,
+    sku INTEGER,
+    quantity INTEGER NOT NULL CHECK (quantity >= 0),
+    PRIMARY KEY (request_id, sku),
+    FOREIGN KEY (request_id) REFERENCES Request(request_id) ON DELETE CASCADE,
+    FOREIGN KEY (sku) REFERENCES Product(sku) ON DELETE CASCADE
+);
 
 ### Проверка нормальных форм
 
@@ -84,7 +170,7 @@ Supplier.supplier_id → full_name, email, address — ключ → OK.
 <img width="1223" height="490" alt="diagramm" src="https://github.com/user-attachments/assets/b2182140-58bd-4239-8221-8c32f5ce5d33" />
 
 
-### Логическая модель
+
 
 
 
