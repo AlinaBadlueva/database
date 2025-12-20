@@ -30,33 +30,33 @@
 ## Логическая модель
 
 ## Сущности
-** Поставщик (Supplier) **
+** Поставщик (Supplier)
 supplier_id (PK) — уникальный идентификатор поставщика
 full_name — ФИО поставщика
 email — электронная почта
 address — адрес
 
-** Товар (Product) ** 
+** Товар (Product)
 sku (PK) — артикул товара
 name — наименование товара
 unit — единица измерения
 unit_price — стоимость единицы
 supplier_id (FK) → Supplier(supplier_id)
 
-** Склад (Warehouse) **
+** Склад (Warehouse)
 warehouse_id (PK) — уникальный идентификатор склада
 address — адрес склада
 warehouse_manager — ФИО кладовщика
 supplier_id (FK) → Supplier(supplier_id)
 
-** Торговая точка (SelectOutlet) **
+** Торговая точка (SelectOutlet)
 name (PK) — наименование торговой точки
 address — адрес
 phone — телефон
 email — электронная почта
 city — город
 
-** Запрос (Request) **
+** Запрос (Request)
 request_id (PK) — уникальный идентификатор запроса
 date — дата запроса
 order_cost — стоимость заказа
