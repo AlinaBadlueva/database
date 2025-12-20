@@ -40,42 +40,42 @@
 - address — адрес
 
 **Товар (Product)**
-sku (PK) — артикул товара
+- sku (PK) — артикул товара
 
-name — наименование товара
+- name — наименование товара
 
-unit — единица измерения
+- unit — единица измерения
 
-unit_price — стоимость единицы
+- unit_price — стоимость единицы
 
-supplier_id (FK) → Supplier(supplier_id)
+- supplier_id (FK) → Supplier(supplier_id)
 
 **Склад (Warehouse)**
-warehouse_id (PK) — уникальный идентификатор склада
+- warehouse_id (PK) — уникальный идентификатор склада
 
-address — адрес склада
+- address — адрес склада
 
-warehouse_manager — ФИО кладовщика
+- warehouse_manager — ФИО кладовщика
 
-supplier_id (FK) → Supplier(supplier_id)
+- supplier_id (FK) → Supplier(supplier_id)
 
 **Торговая точка (SelectOutlet)**
-name (PK) — наименование торговой точки
+- name (PK) — наименование торговой точки
 
-address — адрес
+- address — адрес
 
-phone — телефон
+- phone — телефон
 
-email — электронная почта
+- email — электронная почта
 
-city — город
+- city — город
 
 **Запрос (Request)**
-request_id (PK) — уникальный идентификатор запроса
+- request_id (PK) — уникальный идентификатор запроса
 
-date — дата запроса
+- date — дата запроса
 
-order_cost — стоимость заказа
+- order_cost — стоимость заказа
 
 ## СВЯЗУЮЩИЕ ТАБЛИЦЫ (Отношения N:M)
 Товары на складах (WarehouseProduct)
