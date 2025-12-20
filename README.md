@@ -346,9 +346,39 @@ ORDER BY p.name, w.warehouse_id;
 
 <img width="6956" height="3258" alt="deepseek_mermaid_20251220_7e68b2" src="https://github.com/user-attachments/assets/9f1aa2ba-a2ec-44e5-92f8-4370de7b8c57" />
 
+# Лабораторная работа №2
 
+*Задачи:*
+Преобразование ER-диаграммы в логическую модель
+Проектирование физической модели
+Создание DDL-запросов для PostgreSQL
+Заполнение таблиц данными (минимум 4 строки)
+Проверка при помощи Deepseek 4 и 5 нормальных форм (по желанию) 8-)
+Делаете дамп вашей схемы данных (для командной строки пример - 'pg_dump -n eugeneai –insert study') в клиенте
+Отдаете в ваш чат Deepseek с запросом на проверку
+Добавляете результат в отчет
+Выполнение содержательных SELECT-запросов с JOIN 2-3 таблиц (Выходные документы по заданию, их два!)
 
+## Заполнение таблиц:
 
+<img width="1165" height="766" alt="2025-12-20_20-11-28" src="https://github.com/user-attachments/assets/020e73d3-1ba5-4632-8ce8-b79806f9d054" />
 
+<img width="1099" height="836" alt="2025-12-20_20-12-14" src="https://github.com/user-attachments/assets/6eb33bc9-8f63-43e5-bf19-0fab1cd880f9" />
 
+<img width="1404" height="665" alt="2025-12-20_20-12-59" src="https://github.com/user-attachments/assets/722e80d4-a45a-4e65-80e4-26e39b0117e0" />
 
+<img width="952" height="855" alt="2025-12-20_20-13-41" src="https://github.com/user-attachments/assets/07cbc41d-8ee1-4d9d-8401-ac23eb0c93de" />
+
+<img width="978" height="755" alt="2025-12-20_20-14-00" src="https://github.com/user-attachments/assets/162cad6a-2a98-4450-98e0-7d61f02f0b5e" />
+
+<img width="831" height="839" alt="2025-12-20_20-14-24" src="https://github.com/user-attachments/assets/743537f7-9dcc-44e1-ab51-c19b132af0e5" />
+
+## 1 Запрос. Выдать список товаров на каждом складе, отсортированный по наименованиям товаров с подсчетом стоимости каждого товара
+
+<img width="1573" height="899" alt="2025-12-20_20-19-53" src="https://github.com/user-attachments/assets/7a6d29a5-2a6d-4d0d-aa69-5d609311067f" />
+
+<img width="1524" height="868" alt="2025-12-20_20-20-04" src="https://github.com/user-attachments/assets/e6c373d1-cee1-4629-be35-40626d37e228" />
+
+## 2. Запрос.  Для заданной торговой точки выдать список запрашиваемых товаров с указанием их количества, упорядоченный по наименованиям товаров и по номерам складов
+
+<img width="1463" height="747" alt="2025-12-20_20-29-37" src="https://github.com/user-attachments/assets/37868d4f-9b76-4b6b-8682-73570fa29c7f" />
