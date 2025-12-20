@@ -1,4 +1,4 @@
-# Лабораторная работа №1
+<img width="6956" height="3258" alt="deepseek_mermaid_20251220_7e68b2" src="https://github.com/user-attachments/assets/f96011f2-8b3a-4dc2-851e-c28736c45e5a" /># Лабораторная работа №1
 ## Постановка задачи:
 **Учет товаров на складах и их потребности на торговых точках (1 вариант)**
 
@@ -340,7 +340,11 @@ ORDER BY p.name, w.warehouse_id;
 
 ## Логическая модель в виде Диаграммы классов
 
-<>
+<img width="4588" height="2835" alt="deepseek_mermaid_20251220_fe2359" src="https://github.com/user-attachments/assets/f1207f11-7d5e-4d66-b39c-01b689b36542" />
+
+## Физическая модель БД
+
+<img width="6956" height="3258" alt="deepseek_mermaid_20251220_7e68b2" src="https://github.com/user-attachments/assets/9f1aa2ba-a2ec-44e5-92f8-4370de7b8c57" />
 
 
 
