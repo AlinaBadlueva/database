@@ -412,10 +412,10 @@ ORDER BY p.name, w.warehouse_id;
   
 - Разработка хранимых процедур с параметрами
   
-- Представление сложных запросов при помощи представления
+- Оптимизация запросов через представления
 
-## Создание представлений. 
-# Представление для Выходного документа 1. Список товаров на каждом складе с подсчетом стоимости.
+## Создание представлений
+## Представление для Выходного документа 1. Список товаров на каждом складе с подсчетом стоимости.
 
 <img width="745" height="585" alt="2025-12-20_21-00-30" src="https://github.com/user-attachments/assets/76200e44-bda7-42ef-bb52-a8d1be6b771a" />
 <img width="1557" height="372" alt="2025-12-20_21-01-46" src="https://github.com/user-attachments/assets/9138511c-61d5-4b3f-b5db-d6bba7195bd5" />
@@ -424,15 +424,29 @@ ORDER BY p.name, w.warehouse_id;
 <img width="907" height="748" alt="2025-12-20_21-07-35" src="https://github.com/user-attachments/assets/cea8ec31-ca6f-4363-af5e-3d9a0c36baeb" />
 <img width="1559" height="314" alt="2025-12-20_21-08-24" src="https://github.com/user-attachments/assets/0c62c026-4dd1-499a-8714-3000ef9cad1d" />
 
-## Статистика поставщиков
+## Представление: Статистика поставщиков
 <img width="813" height="490" alt="2025-12-20_21-19-00" src="https://github.com/user-attachments/assets/74c10b5f-892d-4365-a628-e0208c97e6f6" />
 <img width="1485" height="248" alt="2025-12-20_21-21-39" src="https://github.com/user-attachments/assets/9113cfaa-2bf0-48f2-bb95-e95fa9f54b5c" />
 
-## Ежедневные остатки
+## Представление: Ежедневные остатки
 <img width="1090" height="672" alt="2025-12-20_21-24-31" src="https://github.com/user-attachments/assets/544f8deb-3f94-4fbc-acd1-08f063e0f19d" />
 
+## Представление: Топ товаров по спросу
+<img width="1359" height="820" alt="2025-12-20_21-30-39" src="https://github.com/user-attachments/assets/0081e583-6fc6-45c8-9940-0385b5c54d70" />
 
+## Создание хранимых процедур
+### Процедура для получения статистики за период
+<img width="651" height="412" alt="2025-12-20_22-15-41" src="https://github.com/user-attachments/assets/e291a8d5-db3d-4425-984b-cefb1c90c227" />
+<img width="679" height="585" alt="2025-12-20_22-15-53" src="https://github.com/user-attachments/assets/adcb7530-5eb8-4a7a-a643-57fe05b420cf" />
 
+### Процедура добавления нового запроса
+<img width="633" height="545" alt="2025-12-20_22-18-05" src="https://github.com/user-attachments/assets/4ba6e4a3-90c3-42b6-bb83-60e384e70326" />
+
+### Процедура добавления товара на склад
+<img width="616" height="513" alt="2025-12-20_22-19-44" src="https://github.com/user-attachments/assets/5fb346dc-84e0-470b-abef-25e3cee632ac" />
+
+## Оптимизация запросов через представления
+<img width="1034" height="670" alt="2025-12-20_22-11-19" src="https://github.com/user-attachments/assets/ef5a502c-b8a9-4d01-be22-4222c51ae177" />
 
 
 
