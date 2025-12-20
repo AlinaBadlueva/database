@@ -405,6 +405,36 @@ ORDER BY p.name, w.warehouse_id;
 
 <img width="799" height="819" alt="2025-12-20_20-46-35" src="https://github.com/user-attachments/assets/e546b965-2e9e-40c5-ad37-016adf6b85c7" />
 
+# Лабораторная работа №3
+## Цель: Освоение механизмов абстракции данных и программных модулей.
+*Задачи:*
+- Создание представлений для выходных документов
+  
+- Разработка хранимых процедур с параметрами
+  
+- Представление сложных запросов при помощи представления
+
+## Создание представлений. 
+# Представление для Выходного документа 1. Список товаров на каждом складе с подсчетом стоимости.
+
+<img width="745" height="585" alt="2025-12-20_21-00-30" src="https://github.com/user-attachments/assets/76200e44-bda7-42ef-bb52-a8d1be6b771a" />
+<img width="1557" height="372" alt="2025-12-20_21-01-46" src="https://github.com/user-attachments/assets/9138511c-61d5-4b3f-b5db-d6bba7195bd5" />
+
+## Представление для Выходного документа 2. Запросы для торговой точки
+<img width="907" height="748" alt="2025-12-20_21-07-35" src="https://github.com/user-attachments/assets/cea8ec31-ca6f-4363-af5e-3d9a0c36baeb" />
+<img width="1559" height="314" alt="2025-12-20_21-08-24" src="https://github.com/user-attachments/assets/0c62c026-4dd1-499a-8714-3000ef9cad1d" />
+
+## Статистика поставщиков
+<img width="813" height="490" alt="2025-12-20_21-19-00" src="https://github.com/user-attachments/assets/74c10b5f-892d-4365-a628-e0208c97e6f6" />
+<img width="1485" height="248" alt="2025-12-20_21-21-39" src="https://github.com/user-attachments/assets/9113cfaa-2bf0-48f2-bb95-e95fa9f54b5c" />
+
+## Ежедневные остатки
+<img width="1090" height="672" alt="2025-12-20_21-24-31" src="https://github.com/user-attachments/assets/544f8deb-3f94-4fbc-acd1-08f063e0f19d" />
+
+
+
+
+
 
 
 
