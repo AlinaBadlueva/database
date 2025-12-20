@@ -31,54 +31,58 @@
 [Товары]-N,Required---------------------------N,Optional-[Торговая точка]
 
 ## Логическая модель
-#### Сущности
-
+### Сущности
 **1. Поставщик (Supplier)**
-- supplier_id (PK) — уникальный идентификатор поставщика
 
-- full_name — ФИО поставщика
+- supplier_id (PK, Primary Key) - Уникальный идентификатор поставщика
 
-- email — электронная почта
+- full_name (VARCHAR) - ФИО поставщика
 
-- address — адрес
+- email (VARCHAR) - Электронная почта
+
+- address (VARCHAR) - Адрес поставщика
 
 **2. Товар (Product)**
-- sku (PK) — артикул товара
 
-- name — наименование товара
+- sku (PK) - Артикул товара (уникальный идентификатор)
 
-- unit — единица измерения
+- name (VARCHAR) - Наименование товара
 
-- unit_price — стоимость единицы
+- unit (VARCHAR) - Единица измерения
 
-- supplier_id (FK) → Supplier(supplier_id)
+- unit_price (DECIMAL) - Стоимость единицы товара
+
+- supplier_id (FK) - Код поставщика (ссылка на Supplier)
 
 **3. Склад (Warehouse)**
-- warehouse_id (PK) — уникальный идентификатор склада
 
-- address — адрес склада
+- warehouse_id (PK) - Уникальный идентификатор склада
 
-- warehouse_manager — ФИО кладовщика
+- address (VARCHAR) - Адрес склада
 
-- supplier_id (FK) → Supplier(supplier_id)
+- warehouse_manager (VARCHAR) - ФИО кладовщика
+
+- supplier_id (FK) - Код поставщика (ссылка на Supplier)
 
 **4. Торговая точка (SelectOutlet)**
-- name (PK) — наименование торговой точки
 
-- address — адрес
+- name (PK) - Наименование торговой точки
 
-- phone — телефон
+- address (VARCHAR) - Адрес
 
-- email — электронная почта
+- phone (VARCHAR) - Телефон
 
-- city — город
+- email (VARCHAR) - Электронная почта
+
+- city (VARCHAR) - Город
 
 **5. Запрос (Request)**
-- request_id (PK) — уникальный идентификатор запроса
 
-- date — дата запроса
+- request_id (PK) - Уникальный идентификатор запроса
 
-- order_cost — стоимость заказа
+- date (DATE) - Дата запроса
+
+- order_cost (DECIMAL) - Стоимость заказа
 
 *СВЯЗИ*
 
