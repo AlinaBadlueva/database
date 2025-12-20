@@ -80,20 +80,30 @@
 - Товары на складах (WarehouseProduct)
 
 warehouse_id (FK) → Warehouse(warehouse_id)
+
 sku (FK) → Product(sku)
+
 quantity — количество товара на складе
+
 Первичный ключ: (warehouse_id, sku)
 
 - Товары в торговых точках (OutletProduct)
+- 
 outlet_name (FK) → SelectOutlet(name)
+
 sku (FK) → Product(sku)
+
 quantity — количество товара в точке
+
 Первичный ключ: (outlet_name, sku)
 
 - Товары в запросах (RequestProduct)
 request_id (FK) → Request(request_id)
+
 sku (FK) → Product(sku)
+
 quantity — запрашиваемое количество
+
 Первичный ключ: (request_id, sku)
 
 ## Лабораторная работа №1
