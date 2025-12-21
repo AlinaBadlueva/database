@@ -452,7 +452,18 @@ ORDER BY p.name, w.warehouse_id;
 <img width="903" height="621" alt="2025-12-21_16-50-23" src="https://github.com/user-attachments/assets/b0bef99b-e12b-486a-8eae-d1b9e3b4e8e4" />
 <img width="616" height="144" alt="2025-12-21_16-51-48" src="https://github.com/user-attachments/assets/b32d89cf-b133-4169-9ee7-d00f992761a5" />
 
-### Генератор торговых точек
+### Генератор товаров
+<img width="957" height="520" alt="2025-12-21_17-15-39" src="https://github.com/user-attachments/assets/19c67416-5b68-4aaa-a76a-5c1f09b237a2" />
+<img width="531" height="319" alt="2025-12-21_17-16-02" src="https://github.com/user-attachments/assets/bb84f348-6a6e-4ddf-bda4-65390d441d6f" />
+
+### Генератор связей товаров со складами
+
+
+
+
+
+
+
 
 
 
