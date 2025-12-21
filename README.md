@@ -448,6 +448,14 @@ ORDER BY p.name, w.warehouse_id;
 <img width="871" height="547" alt="2025-12-21_16-55-02" src="https://github.com/user-attachments/assets/37925bf4-ae4d-4c2d-ba57-30dc30a218ba" />
 <img width="579" height="234" alt="2025-12-21_16-56-26" src="https://github.com/user-attachments/assets/f74c6ccd-5317-4126-a2ba-6d5b3da56f48" />
 
+### Генератор торговых точек
+<img width="804" height="653" alt="2025-12-21_17-33-27" src="https://github.com/user-attachments/assets/7ea1bdd9-8784-4c6c-aa00-5ce4b357237c" />
+<img width="555" height="345" alt="2025-12-21_17-34-53" src="https://github.com/user-attachments/assets/a4690912-649a-42b4-8b87-43b1b86a8f2a" />
+
+
+
+
+
 ### Генератор поставщиков
 <img width="903" height="621" alt="2025-12-21_16-50-23" src="https://github.com/user-attachments/assets/b0bef99b-e12b-486a-8eae-d1b9e3b4e8e4" />
 <img width="616" height="144" alt="2025-12-21_16-51-48" src="https://github.com/user-attachments/assets/b32d89cf-b133-4169-9ee7-d00f992761a5" />
@@ -457,6 +465,8 @@ ORDER BY p.name, w.warehouse_id;
 <img width="531" height="319" alt="2025-12-21_17-16-02" src="https://github.com/user-attachments/assets/bb84f348-6a6e-4ddf-bda4-65390d441d6f" />
 
 ### Генератор связей товаров со складами
+<img width="882" height="578" alt="2025-12-21_17-20-00" src="https://github.com/user-attachments/assets/0891a1d0-1de6-4a93-b536-7908b84003a0" />
+<img width="724" height="558" alt="2025-12-21_17-20-13" src="https://github.com/user-attachments/assets/8273574f-970b-4f99-a251-4471cc9952c0" />
 
 
 
