@@ -390,7 +390,6 @@ ORDER BY p.name, w.warehouse_id;
 
 ## Создание представлений
 ## Представление для Выходного документа 1. Список товаров на каждом складе с подсчетом стоимости.
-
 <img width="745" height="585" alt="2025-12-20_21-00-30" src="https://github.com/user-attachments/assets/76200e44-bda7-42ef-bb52-a8d1be6b771a" />
 <img width="1557" height="372" alt="2025-12-20_21-01-46" src="https://github.com/user-attachments/assets/9138511c-61d5-4b3f-b5db-d6bba7195bd5" />
 
