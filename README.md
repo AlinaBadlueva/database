@@ -455,6 +455,7 @@ ORDER BY p.name, w.warehouse_id;
 ## Оптимизация БД через индексы
 ## Анализ
 <img width="776" height="541" alt="2025-12-21_19-06-29" src="https://github.com/user-attachments/assets/d3934a07-13a1-4f07-bd35-bb8b5b04a3f0" />
+
 ## Без индекса
 <img width="978" height="694" alt="2025-12-21_19-06-47" src="https://github.com/user-attachments/assets/4c689c13-8588-4300-b0dc-3c11696d79b0" />
 
