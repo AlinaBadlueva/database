@@ -399,12 +399,6 @@ ORDER BY p.name, w.warehouse_id;
 
 <img width="933" height="755" alt="2025-12-20_20-42-43" src="https://github.com/user-attachments/assets/30cac320-7b63-4b68-b78a-17143d85ac8d" />
 
-## Проверка нормальных форм(b):
-
-<img width="812" height="835" alt="2025-12-20_20-46-30" src="https://github.com/user-attachments/assets/b9ec222f-692a-41e9-bf3b-34fcc085ca54" />
-
-<img width="799" height="819" alt="2025-12-20_20-46-35" src="https://github.com/user-attachments/assets/e546b965-2e9e-40c5-ad37-016adf6b85c7" />
-
 # Лабораторная работа №3
 ## Цель: Освоение механизмов абстракции данных и программных модулей.
 *Задачи:*
@@ -448,6 +442,17 @@ ORDER BY p.name, w.warehouse_id;
 ## Оптимизация запросов через представления
 <img width="1034" height="670" alt="2025-12-20_22-11-19" src="https://github.com/user-attachments/assets/ef5a502c-b8a9-4d01-be22-4222c51ae177" />
 
+# Лабораторная работа №4
+## Создание генератора данных (20 000 записей в каждой таблице)
+### Генератор складов
+<img width="871" height="547" alt="2025-12-21_16-55-02" src="https://github.com/user-attachments/assets/37925bf4-ae4d-4c2d-ba57-30dc30a218ba" />
+<img width="579" height="234" alt="2025-12-21_16-56-26" src="https://github.com/user-attachments/assets/f74c6ccd-5317-4126-a2ba-6d5b3da56f48" />
+
+### Генератор поставщиков
+<img width="903" height="621" alt="2025-12-21_16-50-23" src="https://github.com/user-attachments/assets/b0bef99b-e12b-486a-8eae-d1b9e3b4e8e4" />
+<img width="616" height="144" alt="2025-12-21_16-51-48" src="https://github.com/user-attachments/assets/b32d89cf-b133-4169-9ee7-d00f992761a5" />
+
+### Генератор торговых точек
 
 
 
