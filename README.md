@@ -467,7 +467,379 @@ ORDER BY p.name, w.warehouse_id;
 
 С индексами производительность быстрее
 
+# Лабораторная работа №5
+### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ТОВАРОВ НА СКЛАДАХ ПРИ УДАЛЕНИИ ТОВАРА
 
+CREATE OR REPLACE FUNCTION badlueva_2262.delete_warehouse_product_cascade_function()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Триггер запущен! Удаляем товары на складах для товара SKU %', OLD.sku;
+    DELETE FROM badlueva_2262.WarehouseProduct WHERE sku = OLD.sku;
+    RETURN OLD;
+END;
+$$;
+
+CREATE OR REPLACE TRIGGER delete_warehouse_product_cascade_trigger
+    BEFORE DELETE ON badlueva_2262.Product
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.delete_warehouse_product_cascade_function();
+
+### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ТОВАРОВ В ЗАПРОСАХ ПРИ УДАЛЕНИИ ТОВАРА
+
+CREATE OR REPLACE FUNCTION badlueva_2262.delete_request_product_cascade_function()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Триггер запущен! Удаляем товары в запросах для товара SKU %', OLD.sku;
+    DELETE FROM badlueva_2262.RequestProduct WHERE sku = OLD.sku;
+    RETURN OLD;
+END;
+$$;
+
+CREATE OR REPLACE TRIGGER delete_request_product_cascade_trigger
+    BEFORE DELETE ON badlueva_2262.Product
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.delete_request_product_cascade_function();
+
+### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ТОВАРОВ ПРИ УДАЛЕНИИ ПОСТАВЩИКА
+
+CREATE OR REPLACE FUNCTION badlueva_2262.delete_product_cascade_function()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Триггер запущен! Удаляем товары поставщика ID %', OLD.supplier_id;
+    DELETE FROM badlueva_2262.Product WHERE supplier_id = OLD.supplier_id;
+    RETURN OLD;
+END;
+$$;
+
+CREATE OR REPLACE TRIGGER delete_product_cascade_trigger
+    BEFORE DELETE ON badlueva_2262.Supplier
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.delete_product_cascade_function();
+
+### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ТОВАРОВ НА СКЛАДЕ ПРИ УДАЛЕНИИ СКЛАДА
+
+CREATE OR REPLACE FUNCTION badlueva_2262.delete_warehouse_products_cascade_function()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Триггер запущен! Удаляем товары со склада ID %', OLD.warehouse_id;
+    DELETE FROM badlueva_2262.WarehouseProduct WHERE warehouse_id = OLD.warehouse_id;
+    RETURN OLD;
+END;
+$$;
+
+CREATE OR REPLACE TRIGGER delete_warehouse_products_cascade_trigger
+    BEFORE DELETE ON badlueva_2262.Warehouse
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.delete_warehouse_products_cascade_function();
+
+### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ТОВАРОВ В ЗАПРОСАХ ПРИ УДАЛЕНИИ ЗАПРОСА
+
+CREATE OR REPLACE FUNCTION badlueva_2262.delete_request_products_cascade_function()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Триггер запущен! Удаляем товары из запроса ID %', OLD.request_id;
+    DELETE FROM badlueva_2262.RequestProduct WHERE request_id = OLD.request_id;
+    RETURN OLD;
+END;
+$$;
+
+CREATE OR REPLACE TRIGGER delete_request_products_cascade_trigger
+    BEFORE DELETE ON badlueva_2262.Request
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.delete_request_products_cascade_function();
+
+### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ЗАПРОСОВ ПРИ УДАЛЕНИИ ТОРГОВОЙ ТОЧКИ
+
+CREATE OR REPLACE FUNCTION badlueva_2262.delete_requests_cascade_function()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RAISE NOTICE 'Триггер запущен! Удаляем запросы для торговой точки %', OLD.name;
+    DELETE FROM badlueva_2262.Request WHERE outlet_name = OLD.name;
+    RETURN OLD;
+END;
+$$;
+
+CREATE OR REPLACE TRIGGER delete_requests_cascade_trigger
+    BEFORE DELETE ON badlueva_2262.SelectOutlet
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.delete_requests_cascade_function();
+
+### ТРИГГЕР АУДИТА ИЗМЕНЕНИЙ ДЛЯ ВСЕХ ТАБЛИЦ
+CREATE OR REPLACE FUNCTION badlueva_2262.триггер_аудит_изменений()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF (TG_OP = 'DELETE') THEN
+        INSERT INTO badlueva_2262."Журнал_Изменений" (
+            имя_таблицы, 
+            тип_операции, 
+            id_объекта, 
+            данные_до
+        )
+        VALUES (
+            TG_TABLE_NAME, 
+            'DELETE', 
+            CASE 
+                WHEN TG_TABLE_NAME = 'SelectOutlet' THEN OLD.name::INTEGER
+                ELSE OLD.id 
+            END,
+            row_to_json(OLD)::JSONB
+        );
+        RETURN OLD;
+        ELSIF (TG_OP = 'UPDATE') THEN
+        INSERT INTO badlueva_2262."Журнал_Изменений" (
+            имя_таблицы, 
+            тип_операции, 
+            id_объекта, 
+            данные_до, 
+            данные_после
+        )
+        VALUES (
+            TG_TABLE_NAME, 
+            'UPDATE', 
+            CASE 
+                WHEN TG_TABLE_NAME = 'SelectOutlet' THEN NEW.name::INTEGER
+                ELSE NEW.id 
+            END,
+            row_to_json(OLD)::JSONB, 
+            row_to_json(NEW)::JSONB
+        );
+        RETURN NEW;
+        ELSIF (TG_OP = 'INSERT') THEN
+        INSERT INTO badlueva_2262."Журнал_Изменений" (
+            имя_таблицы, 
+            тип_операции, 
+            id_объекта, 
+            данные_после
+        )
+        VALUES (
+            TG_TABLE_NAME, 
+            'INSERT', 
+            CASE 
+                WHEN TG_TABLE_NAME = 'SelectOutlet' THEN NEW.name::INTEGER
+                ELSE NEW.id 
+            END,
+            row_to_json(NEW)::JSONB
+        );
+        RETURN NEW;
+    END IF;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+### СОЗДАНИЕ ТРИГГЕРОВ АУДИТА ДЛЯ КАЖДОЙ ТАБЛИЦЫ
+
+*Аудит для таблицы Product*
+
+DROP TRIGGER IF EXISTS audit_product_trigger ON badlueva_2262.Product;
+CREATE TRIGGER audit_product_trigger
+    AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.Product
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
+
+*Аудит для таблицы Supplier*
+
+DROP TRIGGER IF EXISTS audit_supplier_trigger ON badlueva_2262.Supplier;
+CREATE TRIGGER audit_supplier_trigger
+    AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.Supplier
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
+
+*Аудит для таблицы Warehouse*
+
+DROP TRIGGER IF EXISTS audit_warehouse_trigger ON badlueva_2262.Warehouse;
+CREATE TRIGGER audit_warehouse_trigger
+    AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.Warehouse
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
+
+*Аудит для таблицы SelectOutlet*
+
+DROP TRIGGER IF EXISTS audit_outlet_trigger ON badlueva_2262.SelectOutlet;
+CREATE TRIGGER audit_outlet_trigger
+    AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.SelectOutlet
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
+
+*Аудит для таблицы Request*
+
+DROP TRIGGER IF EXISTS audit_request_trigger ON badlueva_2262.Request;
+CREATE TRIGGER audit_request_trigger
+    AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.Request
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
+
+*Аудит для таблицы WarehouseProduct*
+
+DROP TRIGGER IF EXISTS audit_warehouse_product_trigger ON badlueva_2262.WarehouseProduct;
+CREATE TRIGGER audit_warehouse_product_trigger
+    AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.WarehouseProduct
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
+
+*Аудит для таблицы RequestProduct*
+
+DROP TRIGGER IF EXISTS audit_request_product_trigger ON badlueva_2262.RequestProduct;
+CREATE TRIGGER audit_request_product_trigger
+    AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.RequestProduct
+    FOR EACH ROW
+    EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
+
+### ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ РАБОТЫ С ЖУРНАЛОМ ИЗМЕНЕНИЙ
+
+*Функция для получения истории изменений по таблице*
+
+CREATE OR REPLACE FUNCTION badlueva_2262.получить_историю_изменений(
+    p_таблица TEXT DEFAULT NULL,
+    p_id_объекта INTEGER DEFAULT NULL,
+    p_тип_операции TEXT DEFAULT NULL
+)
+RETURNS TABLE (
+    id_samvcu BIGINT,
+    имя_таблицы TEXT,
+    тип_операции TEXT,
+    id_объекта INTEGER,
+    данные_до JSONB,
+    данные_после JSONB,
+    пользователь TEXT,
+    время_изменения TIMESTAMP
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        ж.id_samvcu,
+        ж.имя_таблицы,
+        ж.тип_операции,
+        ж.id_объекта,
+        ж.данные_до,
+        ж.данные_после,
+        ж.пользователь,
+        ж.время_изменения
+    FROM badlueva_2262."Журнал_Изменений" ж
+    WHERE (p_таблица IS NULL OR ж.имя_таблицы = p_таблица)
+        AND (p_id_объекта IS NULL OR ж.id_объекта = p_id_объекта)
+        AND (p_тип_операции IS NULL OR ж.тип_операции = p_тип_операции)
+    ORDER BY ж.время_изменения DESC;
+END;
+$$ LANGUAGE plpgsql;
+
+*Функция для получения последних изменений*
+
+CREATE OR REPLACE FUNCTION badlueva_2262.последние_изменения(p_лимит INTEGER DEFAULT 10)
+RETURNS TABLE (
+    id_samvcu BIGINT,
+    таблица TEXT,
+    операция TEXT,
+    id_объекта INTEGER,
+    пользователь TEXT,
+    время TIMESTAMP,
+    изменения JSONB
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        ж.id_samvcu,
+        ж.имя_таблицы as таблица,
+        ж.тип_операции as операция,
+        ж.id_объекта,
+        ж.пользователь,
+        ж.время_изменения as время,
+        COALESCE(ж.данные_после, ж.данные_до) as изменения
+    FROM badlueva_2262."Журнал_Изменений" ж
+    ORDER BY ж.время_изменения DESC
+    LIMIT p_лимит;
+END;
+$$ LANGUAGE plpgsql;
+
+*Функция для очистки старых записей журнала*
+
+CREATE OR REPLACE FUNCTION badlueva_2262.очистить_журнал_старше_дней(p_дней INTEGER DEFAULT 90)
+RETURNS INTEGER AS $$
+DECLARE
+    v_удалено INTEGER;
+BEGIN
+    DELETE FROM badlueva_2262."Журнал_Изменений" 
+    WHERE время_изменения < CURRENT_TIMESTAMP - (p_дней || ' days')::INTERVAL;
+    GET DIAGNOSTICS v_удалено = ROW_COUNT;
+    RETURN v_удалено;
+END;
+$$ LANGUAGE plpgsql;
+
+### ТЕСТИРОВАНИЕ ТРИГГЕРОВ И АУДИТА
+
+SELECT 'Записей в журнале до тестов: ' || COUNT(*)::TEXT 
+FROM badlueva_2262."Журнал_Изменений";
+
+*Тест INSERT (создаем тестовую запись)*
+
+DO $$
+DECLARE
+    v_test_sku INTEGER;
+BEGIN
+    RAISE NOTICE '=== ТЕСТ INSERT ===';
+    INSERT INTO badlueva_2262.Product (sku, name, unit, unit_price, supplier_id)
+    VALUES (99999, 'Тестовый товар для аудита', 'шт', 150.50, 1)
+    RETURNING sku INTO v_test_sku;
+    RAISE NOTICE 'Создан тестовый товар SKU: %', v_test_sku;
+    RAISE NOTICE 'Проверка журнала после INSERT:';
+END;
+$$;
+
+*Тест UPDATE (изменяем тестовую запись)*
+
+DO $$
+DECLARE
+    v_test_sku INTEGER := 99999;
+BEGIN
+    RAISE NOTICE '=== ТЕСТ UPDATE ===';
+    UPDATE badlueva_2262.Product 
+    SET unit_price = 200.00, name = 'Тестовый товар (обновлен)'
+    WHERE sku = v_test_sku;
+    RAISE NOTICE 'Обновлен товар SKU: %', v_test_sku;
+    RAISE NOTICE 'Проверка журнала после UPDATE:';
+END;
+$$;
+
+*Тест DELETE (удаляем тестовую запись)*
+
+DO $$
+DECLARE
+    v_test_sku INTEGER := 99999;
+    v_count_before INTEGER;
+    v_count_after INTEGER;
+BEGIN
+    RAISE NOTICE '=== ТЕСТ DELETE (с каскадом) ===';
+    SELECT COUNT(*) INTO v_count_before 
+    FROM badlueva_2262.WarehouseProduct 
+    WHERE sku = v_test_sku;
+    RAISE NOTICE 'Товаров на складах до удаления: %', v_count_before;
+    DELETE FROM badlueva_2262.Product WHERE sku = v_test_sku;
+    RAISE NOTICE 'Удален товар SKU: %', v_test_sku;
+    SELECT COUNT(*) INTO v_count_after 
+    FROM badlueva_2262.WarehouseProduct 
+    WHERE sku = v_test_sku;
+    RAISE NOTICE 'Товаров на складах после удаления: %', v_count_after;
+END;
+$$;
+
+*Проверка журнала изменений после тестов*
+SELECT 'Записей в журнале после тестов: ' || COUNT(*)::TEXT 
+FROM badlueva_2262."Журнал_Изменений";
+
+### ПРИМЕРЫ ИСПОЛЬЗОВАНИЯ ФУНКЦИЙ
+```sql
+SELECT * FROM badlueva_2262.получить_историю_изменений('Product', 12345);
+```
 
 
 
