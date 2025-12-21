@@ -469,7 +469,7 @@ ORDER BY p.name, w.warehouse_id;
 
 # Лабораторная работа №5
 ### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ТОВАРОВ НА СКЛАДАХ ПРИ УДАЛЕНИИ ТОВАРА
-
+```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.delete_warehouse_product_cascade_function()
 RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -485,9 +485,9 @@ CREATE OR REPLACE TRIGGER delete_warehouse_product_cascade_trigger
     BEFORE DELETE ON badlueva_2262.Product
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.delete_warehouse_product_cascade_function();
-
+```
 ### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ТОВАРОВ В ЗАПРОСАХ ПРИ УДАЛЕНИИ ТОВАРА
-
+```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.delete_request_product_cascade_function()
 RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -503,9 +503,9 @@ CREATE OR REPLACE TRIGGER delete_request_product_cascade_trigger
     BEFORE DELETE ON badlueva_2262.Product
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.delete_request_product_cascade_function();
-
+```
 ### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ТОВАРОВ ПРИ УДАЛЕНИИ ПОСТАВЩИКА
-
+```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.delete_product_cascade_function()
 RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -521,9 +521,9 @@ CREATE OR REPLACE TRIGGER delete_product_cascade_trigger
     BEFORE DELETE ON badlueva_2262.Supplier
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.delete_product_cascade_function();
-
+```
 ### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ТОВАРОВ НА СКЛАДЕ ПРИ УДАЛЕНИИ СКЛАДА
-
+```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.delete_warehouse_products_cascade_function()
 RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -539,9 +539,9 @@ CREATE OR REPLACE TRIGGER delete_warehouse_products_cascade_trigger
     BEFORE DELETE ON badlueva_2262.Warehouse
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.delete_warehouse_products_cascade_function();
-
+```
 ### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ТОВАРОВ В ЗАПРОСАХ ПРИ УДАЛЕНИИ ЗАПРОСА
-
+```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.delete_request_products_cascade_function()
 RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -557,9 +557,9 @@ CREATE OR REPLACE TRIGGER delete_request_products_cascade_trigger
     BEFORE DELETE ON badlueva_2262.Request
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.delete_request_products_cascade_function();
-
+```
 ### ТРИГГЕР КАСКАДНОГО УДАЛЕНИЯ ЗАПРОСОВ ПРИ УДАЛЕНИИ ТОРГОВОЙ ТОЧКИ
-
+```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.delete_requests_cascade_function()
 RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -575,8 +575,9 @@ CREATE OR REPLACE TRIGGER delete_requests_cascade_trigger
     BEFORE DELETE ON badlueva_2262.SelectOutlet
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.delete_requests_cascade_function();
-
+```
 ### ТРИГГЕР АУДИТА ИЗМЕНЕНИЙ ДЛЯ ВСЕХ ТАБЛИЦ
+```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.триггер_аудит_изменений()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -637,58 +638,59 @@ BEGIN
     RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
+```
 ### СОЗДАНИЕ ТРИГГЕРОВ АУДИТА ДЛЯ КАЖДОЙ ТАБЛИЦЫ
 
 *Аудит для таблицы Product*
-
+```sql
 DROP TRIGGER IF EXISTS audit_product_trigger ON badlueva_2262.Product;
 CREATE TRIGGER audit_product_trigger
     AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.Product
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
-
+```
 *Аудит для таблицы Supplier*
-
+```sql
 DROP TRIGGER IF EXISTS audit_supplier_trigger ON badlueva_2262.Supplier;
 CREATE TRIGGER audit_supplier_trigger
     AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.Supplier
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
-
+```
 *Аудит для таблицы Warehouse*
-
+```sql
 DROP TRIGGER IF EXISTS audit_warehouse_trigger ON badlueva_2262.Warehouse;
 CREATE TRIGGER audit_warehouse_trigger
     AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.Warehouse
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
-
+```
 *Аудит для таблицы SelectOutlet*
-
+```sql
 DROP TRIGGER IF EXISTS audit_outlet_trigger ON badlueva_2262.SelectOutlet;
 CREATE TRIGGER audit_outlet_trigger
     AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.SelectOutlet
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
-
+```
 *Аудит для таблицы Request*
-
+```sql
 DROP TRIGGER IF EXISTS audit_request_trigger ON badlueva_2262.Request;
 CREATE TRIGGER audit_request_trigger
     AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.Request
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
-
+```
 *Аудит для таблицы WarehouseProduct*
-
+```sql
 DROP TRIGGER IF EXISTS audit_warehouse_product_trigger ON badlueva_2262.WarehouseProduct;
 CREATE TRIGGER audit_warehouse_product_trigger
     AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.WarehouseProduct
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
-
+```
 *Аудит для таблицы RequestProduct*
-
+```sql
 DROP TRIGGER IF EXISTS audit_request_product_trigger ON badlueva_2262.RequestProduct;
 CREATE TRIGGER audit_request_product_trigger
     AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.RequestProduct
@@ -696,9 +698,9 @@ CREATE TRIGGER audit_request_product_trigger
     EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
 
 ### ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ РАБОТЫ С ЖУРНАЛОМ ИЗМЕНЕНИЙ
-
+```
 *Функция для получения истории изменений по таблице*
-
+```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.получить_историю_изменений(
     p_таблица TEXT DEFAULT NULL,
     p_id_объекта INTEGER DEFAULT NULL,
@@ -732,9 +734,9 @@ BEGIN
     ORDER BY ж.время_изменения DESC;
 END;
 $$ LANGUAGE plpgsql;
-
+```
 *Функция для получения последних изменений*
-
+```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.последние_изменения(p_лимит INTEGER DEFAULT 10)
 RETURNS TABLE (
     id_samvcu BIGINT,
@@ -760,9 +762,9 @@ BEGIN
     LIMIT p_лимит;
 END;
 $$ LANGUAGE plpgsql;
-
+```
 *Функция для очистки старых записей журнала*
-
+```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.очистить_журнал_старше_дней(p_дней INTEGER DEFAULT 90)
 RETURNS INTEGER AS $$
 DECLARE
@@ -774,14 +776,14 @@ BEGIN
     RETURN v_удалено;
 END;
 $$ LANGUAGE plpgsql;
-
+```
 ### ТЕСТИРОВАНИЕ ТРИГГЕРОВ И АУДИТА
-
+```sql
 SELECT 'Записей в журнале до тестов: ' || COUNT(*)::TEXT 
 FROM badlueva_2262."Журнал_Изменений";
-
+```
 *Тест INSERT (создаем тестовую запись)*
-
+```sql
 DO $$
 DECLARE
     v_test_sku INTEGER;
@@ -794,9 +796,9 @@ BEGIN
     RAISE NOTICE 'Проверка журнала после INSERT:';
 END;
 $$;
-
+```
 *Тест UPDATE (изменяем тестовую запись)*
-
+```sql
 DO $$
 DECLARE
     v_test_sku INTEGER := 99999;
@@ -809,9 +811,9 @@ BEGIN
     RAISE NOTICE 'Проверка журнала после UPDATE:';
 END;
 $$;
-
+```
 *Тест DELETE (удаляем тестовую запись)*
-
+```sql
 DO $$
 DECLARE
     v_test_sku INTEGER := 99999;
@@ -831,7 +833,7 @@ BEGIN
     RAISE NOTICE 'Товаров на складах после удаления: %', v_count_after;
 END;
 $$;
-
+```
 *Проверка журнала изменений после тестов*
 SELECT 'Записей в журнале после тестов: ' || COUNT(*)::TEXT 
 FROM badlueva_2262."Журнал_Изменений";
