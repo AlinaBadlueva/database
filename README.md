@@ -843,15 +843,19 @@ FROM badlueva_2262."Журнал_Изменений";
 SELECT * FROM badlueva_2262.получить_историю_изменений('Product', 12345);
 ```
 <img width="921" height="489" alt="2025-12-21_21-34-50" src="https://github.com/user-attachments/assets/40f2f20e-318b-451a-a91e-d214c23657ae" />
+
 ## Создана триггер функция(Удаление товаров со склада при удалении товара)
 <img width="767" height="337" alt="2025-12-21_21-54-20" src="https://github.com/user-attachments/assets/8fce0f19-6f15-4b8c-b97d-7850306b50d7" />
 
 ## Вставляем тестовый товар
 <img width="880" height="561" alt="2025-12-21_21-57-57" src="https://github.com/user-attachments/assets/e86f1efd-c88c-404b-a0fd-c5329415703a" />
+
 ## Обновляем товар
 <img width="552" height="492" alt="2025-12-21_21-59-44" src="https://github.com/user-attachments/assets/c2a21de0-9f13-4f67-a39b-224e84236ea8" />
+
 ## все записи 
 <img width="952" height="528" alt="2025-12-21_22-00-46" src="https://github.com/user-attachments/assets/3854bfc5-7fad-437d-aefe-c8d35d44118f" />
+
 ## Удаляем товар
 <img width="665" height="568" alt="2025-12-21_22-01-33" src="https://github.com/user-attachments/assets/5424db66-93b6-4501-8620-77b8d373f5f6" />
 
