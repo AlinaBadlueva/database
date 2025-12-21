@@ -454,16 +454,17 @@ ORDER BY p.name, w.warehouse_id;
 
 ## Оптимизация БД через индексы
 ## Анализ
-<img width="1111" height="759" alt="2025-12-21_18-04-38" src="https://github.com/user-attachments/assets/5c236e69-58cf-4c7f-a8a7-61d54a4dbd96" />
+<img width="776" height="541" alt="2025-12-21_19-06-29" src="https://github.com/user-attachments/assets/d3934a07-13a1-4f07-bd35-bb8b5b04a3f0" />
+## Без индекса
+<img width="978" height="694" alt="2025-12-21_19-06-47" src="https://github.com/user-attachments/assets/4c689c13-8588-4300-b0dc-3c11696d79b0" />
 
-### Поиск товаров по цене (без индекса)
-<img width="849" height="588" alt="2025-12-21_17-58-46" src="https://github.com/user-attachments/assets/edd24c20-9b4c-4af4-8274-5d82f8fde66c" />
+## Создаем индекс
+<img width="757" height="407" alt="2025-12-21_19-07-12" src="https://github.com/user-attachments/assets/cb6dd211-4cb5-4802-b9c1-21f53b97ec12" />
 
-### Создала индекс
-<img width="925" height="405" alt="2025-12-21_17-59-19" src="https://github.com/user-attachments/assets/78ad3b86-0f65-4b94-a99f-795d171843bc" />
+## С индексом
+<img width="788" height="481" alt="2025-12-21_19-07-34" src="https://github.com/user-attachments/assets/318bcb9e-d25a-4a94-ac37-70f4e8feb3ec" />
 
-### С индексом
-<img width="1211" height="656" alt="2025-12-21_17-59-36" src="https://github.com/user-attachments/assets/522cfe7e-b06c-40a9-a1f8-a24afbd5a32c" />
+С индексами производительность быстрее
 
 
 
