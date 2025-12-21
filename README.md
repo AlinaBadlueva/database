@@ -696,9 +696,8 @@ CREATE TRIGGER audit_request_product_trigger
     AFTER INSERT OR UPDATE OR DELETE ON badlueva_2262.RequestProduct
     FOR EACH ROW
     EXECUTE FUNCTION badlueva_2262.триггер_аудит_изменений();
-
-### ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ РАБОТЫ С ЖУРНАЛОМ ИЗМЕНЕНИЙ
 ```
+### ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ РАБОТЫ С ЖУРНАЛОМ ИЗМЕНЕНИЙ
 *Функция для получения истории изменений по таблице*
 ```sql
 CREATE OR REPLACE FUNCTION badlueva_2262.получить_историю_изменений(
