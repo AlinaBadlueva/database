@@ -452,9 +452,9 @@ ORDER BY p.name, w.warehouse_id;
 <img width="804" height="653" alt="2025-12-21_17-33-27" src="https://github.com/user-attachments/assets/7ea1bdd9-8784-4c6c-aa00-5ce4b357237c" />
 <img width="555" height="345" alt="2025-12-21_17-34-53" src="https://github.com/user-attachments/assets/a4690912-649a-42b4-8b87-43b1b86a8f2a" />
 
-
-
-
+### Генератор запросов
+<img width="795" height="574" alt="2025-12-21_17-42-16" src="https://github.com/user-attachments/assets/1adfadfc-4e3c-4964-9947-8332c09ce22c" />
+<img width="762" height="413" alt="2025-12-21_17-45-43" src="https://github.com/user-attachments/assets/0f16056f-adf9-4fa0-9896-2434b49f1a7a" />
 
 ### Генератор поставщиков
 <img width="903" height="621" alt="2025-12-21_16-50-23" src="https://github.com/user-attachments/assets/b0bef99b-e12b-486a-8eae-d1b9e3b4e8e4" />
@@ -469,6 +469,22 @@ ORDER BY p.name, w.warehouse_id;
 <img width="724" height="558" alt="2025-12-21_17-20-13" src="https://github.com/user-attachments/assets/8273574f-970b-4f99-a251-4471cc9952c0" />
 
 
+### Генератор связей товаров с запросами
+<img width="847" height="556" alt="2025-12-21_17-48-53" src="https://github.com/user-attachments/assets/f87efa10-3624-4ac5-a252-e058187094f5" />
+<img width="654" height="406" alt="2025-12-21_17-49-09" src="https://github.com/user-attachments/assets/2a89006e-8884-4bf8-b248-746b40adc4de" />
+
+## Оптимизация БД через индексы
+## Анализ
+<img width="1111" height="759" alt="2025-12-21_18-04-38" src="https://github.com/user-attachments/assets/5c236e69-58cf-4c7f-a8a7-61d54a4dbd96" />
+
+### Поиск товаров по цене (без индекса)
+<img width="849" height="588" alt="2025-12-21_17-58-46" src="https://github.com/user-attachments/assets/edd24c20-9b4c-4af4-8274-5d82f8fde66c" />
+
+### Создала индекс
+<img width="925" height="405" alt="2025-12-21_17-59-19" src="https://github.com/user-attachments/assets/78ad3b86-0f65-4b94-a99f-795d171843bc" />
+
+### С индексом
+<img width="1211" height="656" alt="2025-12-21_17-59-36" src="https://github.com/user-attachments/assets/522cfe7e-b06c-40a9-a1f8-a24afbd5a32c" />
 
 
 
